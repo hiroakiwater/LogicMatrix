@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Dynamic;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace LogicMatrix
@@ -8,7 +10,7 @@ namespace LogicMatrix
     class LogicMatrix
     {
         private float[,] m;
-        public Func<float, float>[,] logics;
+        public Func<float, float, float>[,] logics;
 
         public float this[int i, int j]
         {
@@ -19,7 +21,7 @@ namespace LogicMatrix
 
             get
             {
-                return logics[i, j](m[i, j]);
+                return this.m[i, j];
             }
         }
 
@@ -37,15 +39,34 @@ namespace LogicMatrix
         {
             this.m = new float[row, col];
 
-            this.logics = new Func<float, float>[row, col];
+            this.logics = new Func<float, float, float>[row, col];
 
             for (int j = 0; j < col; j++)
             {
                 for (int i = 0; i < row; i++)
                 {
-                    this.logics[i, j] = v => 0;
+                    this.m[i, j] = 0.0F;
+                    this.logics[i, j] = (x, y) => 0;
                 }
             }
         }        
+
+        public float SetGradient(float[,] x, float[,] y)
+        {
+            for (int j = 0; j < ColLength; j++)
+            {
+                for (int i = 0; i < RowLength; i++)
+                {
+
+                }
+            }
+
+            return 0.0F;
+        }
+
+        public float GetValue(int i, int j, float[,] x)
+        {
+            return this.logics[i, j](m[i, j], x[i, j]);
+        }
     }
 }
