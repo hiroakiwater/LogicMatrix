@@ -34,7 +34,7 @@ namespace LogicMatrix
             {
                 for (int x = 0; x < m.RowLength; x++)
                 {
-                    m[x, y] = 1;
+                    m[x, y] = 0.0f;
                 }
             }
 
@@ -45,6 +45,37 @@ namespace LogicMatrix
                     Console.WriteLine("[{0}, {1}] = {2}", x, y, m.GetValue(x, y, input));
                 }
             }
+
+
+            float[,] training_data = new float[,] { { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 2.0f, 0.0f }, { 2.5f, 0.0f }, { 3.0f, 1.0f }, { 4.0f, 1.0f }, { 5.0f, 1.0f } };
+
+            for (int j = 0; j < 10; j++)
+            {
+                m[1, 1] += 0.5f;
+
+                float error = 0.0f;
+                for (int i = 0; i < training_data.GetLength(0); i++)
+                {
+                    float[,] train_matrix = new float[2, 3];
+                    train_matrix[1, 1] = training_data[i, 0];
+
+                    float y = m.GetValue(1, 1, train_matrix);
+
+                    Console.WriteLine("{0} -> {1} : {2}", training_data[i, 0], training_data[i, 1], y);
+
+                    error += Math.Abs(y - training_data[i, 1]);
+                }
+
+                Console.WriteLine("error = {0}", error);
+
+                if (error < 0.5f)
+                {
+                    break;
+                }
+            }
+
+            Console.WriteLine("optimized = {0}", m[1, 1]);
+
 
             Console.WriteLine("(row, col) = ({0}, {1})", m.RowLength, m.ColLength);
         }

@@ -49,19 +49,6 @@ namespace LogicMatrix
                     this.logics[i, j] = (x, y) => 0;
                 }
             }
-        }        
-
-        public float SetGradient(float[,] x, float[,] y)
-        {
-            for (int j = 0; j < ColLength; j++)
-            {
-                for (int i = 0; i < RowLength; i++)
-                {
-
-                }
-            }
-
-            return 0.0F;
         }
 
         public float GetValue(int i, int j, float[,] x)
