@@ -30,19 +30,27 @@ namespace LogicMatrix
                 }
             };
 
-            for (int y = 0; y < m.ColLength; y++)
+            float a = 1.0F;
+            for (int x = 0; x < m.RowLength; x++)
             {
-                for (int x = 0; x < m.RowLength; x++)
+                for (int y = 0; y < m.ColLength; y++)
                 {
-                    m[x, y] = 0.0f;
+
+                    m[x, y] = a;
+                    a += 1.0F;
+
+                    Console.Write("{0} ", m[x, y]);
                 }
+                Console.WriteLine();
             }
+
+
 
             for (int y = 0; y < m.ColLength; y++)
             {
                 for (int x = 0; x < m.RowLength; x++)
                 {
-                    Console.WriteLine("[{0}, {1}] = {2}", x, y, m.GetValue(x, y, input));
+                    Console.WriteLine("[{0}, {1}] = {2}", x, y, m.GetValue(x, y, input[x,y]));
                 }
             }
 
@@ -59,7 +67,7 @@ namespace LogicMatrix
                     float[,] train_matrix = new float[2, 3];
                     train_matrix[1, 1] = training_data[i, 0];
 
-                    float y = m.GetValue(1, 1, train_matrix);
+                    float y = m.GetValue(1, 1, train_matrix[1,1]);
 
                     Console.WriteLine("{0} -> {1} : {2}", training_data[i, 0], training_data[i, 1], y);
 
@@ -78,6 +86,33 @@ namespace LogicMatrix
 
 
             Console.WriteLine("(row, col) = ({0}, {1})", m.RowLength, m.ColLength);
+
+
+            float[,] m2 = new float[3, 2];
+            m2[0, 0] = 1;
+            m2[0, 1] = 2;
+            
+            m2[1, 0] = 3;
+            m2[1, 1] = 4;
+
+            m2[2, 0] = 5;
+            m2[2, 1] = 6;
+
+            m[1, 1] = 5;
+
+            float[,] t = m.Assignment(m2);
+
+         
+            for (int i = 0; i < t.GetLength(0); i++)
+            {
+                for (int j = 0; j < t.GetLength(1); j++)
+                {
+                    Console.Write("{0} ", t[i, j]);
+                }
+
+                Console.WriteLine();
+            }
+
         }
     }
 }

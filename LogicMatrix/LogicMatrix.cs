@@ -51,9 +51,32 @@ namespace LogicMatrix
             }
         }
 
-        public float GetValue(int i, int j, float[,] x)
+        public float GetValue(int i, int j, float x)
         {
-            return this.logics[i, j](m[i, j], x[i, j]);
+            return this.logics[i, j](m[i, j], x);
+        }
+
+        public float[,] Assignment(float[,] x)
+        {
+            float[,] output = new float[m.GetLength(0), x.GetLength(1)];
+
+            for (int i = 0; i < output.GetLength(0); i++)
+            {
+                for (int j = 0; j < output.GetLength(1); j++)
+                {
+                    output[i, j] = 0.0F;
+
+                    for (int k = 0; k < x.GetLength(0); k++)
+                    {
+                        //output[i, j] += m[i, k] * x[k, j];
+
+                        output[i, j] += GetValue(i, j, x[k, j]);
+
+                    }
+                }
+            }
+
+            return output;
         }
     }
 }
