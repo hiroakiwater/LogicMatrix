@@ -35,9 +35,9 @@ namespace LogicMatrix
             {
                 for (int y = 0; y < m.ColLength; y++)
                 {
-
-                    m[x, y] = a;
-                    a += 1.0F;
+                    //m[x, y] = a;
+                    //a += 1.0F;
+                    m[x, y] = 0.0F;
 
                     Console.Write("{0} ", m[x, y]);
                 }
@@ -95,7 +95,7 @@ namespace LogicMatrix
             m2[1, 0] = 3;
             m2[1, 1] = 4;
 
-            m2[2, 0] = 5;
+            m2[2, 0] = 15;
             m2[2, 1] = 6;
 
             m[1, 1] = 5;

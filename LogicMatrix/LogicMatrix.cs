@@ -70,8 +70,7 @@ namespace LogicMatrix
                     {
                         //output[i, j] += m[i, k] * x[k, j];
 
-                        output[i, j] += GetValue(i, j, x[k, j]);
-
+                        output[i, j] += GetValue(i, k, x[k, j]);
                     }
                 }
             }
